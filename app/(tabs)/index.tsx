@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { Image, StyleSheet, Platform, View, Text, ActivityIndicator } from 'react-native';
+import { Image, StyleSheet, Text, ScrollView } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 import ApiType from '../api';
+import PizzaCard from '../../components/pizzas/PizzaCard';
+import { RootState } from '../store/store';
+import { addPizzaPanier, removePizzaPanier } from '../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { Pizza } from '../api/models/pizza';
+import { Provider } from 'react-redux'
+import {
+    Button
 
-export default function HomeScreen() {
+} from 'react-native';
+import { store } from '../store/store'
+
+function HomeScreen() {
   const [pizzas, setPizzas] = useState([]);
   const api = new ApiType()
+  const dispatch = useDispatch();
+  const panier = useSelector((state: RootState) => state.pizzaPanier.pizzas);
 
   useEffect(() => {
     
-     const getPizzas = async () => {
+      const getPizzas = async () => {
       try {
         const response = await api.pizzas.getPizzas()
         if (!response) {
@@ -26,10 +36,28 @@ export default function HomeScreen() {
     };
 
     getPizzas();
-
   }, []);
+
+  useEffect(() => {
+    console.log('Panier mis à jour:', panier);
+  }, [panier]);
+
+  const test = () => {
+    handleAddPizza(pizzas[1])
+    console.log(panier)
+  };
+
+  const handleAddPizza = (pizza: Pizza) => {
+    dispatch(addPizzaPanier(pizza));
+  };
+
+  const handleRemovePizza = (id: number) => {
+    const pizzaToRemove = { id } as Pizza;
+    dispatch(removePizzaPanier(pizzaToRemove));
+  };
   return (
-    <ParallaxScrollView
+    <Provider store={store}>
+      <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
         <Image
@@ -37,19 +65,45 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
       }
+      >
+        <Button
+          onPress={test}
+          title="Learn More"
+          color="#841584"/>
+        <Button
+        onPress={() => {
+          if (pizzas.length > 1) {
+            handleRemovePizza(pizzas[1].id);
+          }
+        }}
+        title="Supprimer Pizza"
+        color="#841584"
+      />
+      <ScrollView
+      contentContainerStyle={styles.container}
+      style={styles.scrollView}
     >
-          <View style={styles.container}>
       {pizzas.length === 0 ? (
         <Text>No pizzas available.</Text>
       ) : (
-        pizzas.map((pizza, index) => (
-          <Text key={index}>{pizza.name}</Text>
+        pizzas.map(pizza => (
+          <PizzaCard key={pizza.id} pizza={pizza} />
         ))
       )}
-    </View>
-    </ParallaxScrollView>
+    </ScrollView>
+      </ParallaxScrollView>
+    </Provider>
+      
   );
 }
+
+const AppProvider = () => (
+  <Provider store={store}>
+    <HomeScreen />
+  </Provider>
+);
+
+export default AppProvider;
 
 const styles = StyleSheet.create({
   container: {
@@ -72,5 +126,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  scrollView: {
+    backgroundColor: '#A1CEDC', // Adjust as needed
   },
 });
