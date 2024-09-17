@@ -1,14 +1,8 @@
-import { Image, StyleSheet, Platform } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import ProductList from './productList';
-import { View } from 'react-native-reanimated/lib/typescript/Animated';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Products } from './productList';
+import { useEffect, useState } from 'react';
+import { View } from 'react-native';
+import ProductList, { Products } from '../../components/productList';
 export default function HomeScreen() {
   const [data, setData] = useState<Products>([]);
     
@@ -16,10 +10,12 @@ export default function HomeScreen() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get('url_api');
+          const response = await axios.get('localhost:4000');
           // parse data wirh Products type
+         
           
           const data = response.data
+          console.log(data)
           setData(response.data);
         } catch (error) {
           console.error(error);
@@ -28,12 +24,14 @@ export default function HomeScreen() {
 
       fetchData();
     }, []);
+  const dataexemple = [{ id: 17, name:'pizza', price:12, image:''}]
   
   return (
    
     <View>
       
-        <ProductList Products={data} ></ProductList>
+      <ProductList Products={data} ></ProductList>
+      <ProductList Products={dataexemple} ></ProductList>
        
         </View>
   );
