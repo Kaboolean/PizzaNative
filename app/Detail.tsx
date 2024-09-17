@@ -1,15 +1,27 @@
-import React from 'react';
-import { View, Text } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import React from 'react';
+import { Image, Text, View } from 'react-native';
+
+// Définir le type de l'item
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+};
+
 
 export default function Detail() {
   const route = useRoute();
-  const { id } = route.params; // Récupération de l'ID depuis les paramètres
+  const { item } = route.params as { item: Product }; // Récupération de l'objet complet item
 
   return (
-    <View>
-      <Text>Détails du produit ID: {id}</Text>
-     
+    <View style={{ padding: 20 }}>
+      <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Détails du produit</Text>
+      <Image source={{ uri: item.image }} style={{ width: 200, height: 200, marginVertical: 20 }} />
+      <Text>ID: {item.id}</Text>
+      <Text>Nom: {item.name}</Text>
+      <Text>Prix: {item.price} €</Text>
     </View>
   );
 }

@@ -1,16 +1,16 @@
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
-import ProductList, { Products } from '../../components/productList';
+import { ScrollView } from 'react-native-gesture-handler';
+import ProductList, { Product } from '../../components/productList';
 export default function HomeScreen() {
-  const [data, setData] = useState<Products>([]);
+  const [data, setData] = useState<Product[]>([]);
     
 
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get('localhost:4000');
+          const response = await axios.get('http://localhost:4000/pizzas');
           // parse data wirh Products type
          
           
@@ -24,16 +24,16 @@ export default function HomeScreen() {
 
       fetchData();
     }, []);
-  const dataexemple = [{ id: 17, name:'pizza', price:12, image:''}]
+  const dataexemple = [{ id: 17, name:'pizza', price:12, image_url:'', description:''},{ id: 18, name:'pizza fromage', price:22, image_url:'', description:''}]
   
   return (
    
-    <View>
+    <ScrollView>
       
       <ProductList Products={data} ></ProductList>
       <ProductList Products={dataexemple} ></ProductList>
        
-        </View>
+        </ScrollView>
   );
 }
 
