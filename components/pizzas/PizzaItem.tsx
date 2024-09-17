@@ -8,6 +8,7 @@ type Props = {
 }
 
 const PizzaItem = (props: Props) => {
+    
     //Return an image's path placed in the assets/images/ folder 
     function getImage(image: string): string{
         return "../../assets/images/" + image;
