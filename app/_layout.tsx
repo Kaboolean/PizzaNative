@@ -1,34 +1,16 @@
-import * as React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
+import { Stack } from 'expo-router'; // Utiliser Stack d'expo-router pour gérer la navigation
+import { Provider } from 'react-redux'; // Importer Provider de Redux
+import { store } from '@/store/store'; // Importer le store Redux
 
-import PizzaListScreen from './pizzaListScreen';
-import PizzaDetailsScreen from './pizzaDetailsScreen';
-import { Pizza } from '../api/models/pizza';
-
-// Définir les types des paramètres pour chaque écran
-export type StackParamList = {
-  pizzaListScreen: { list: Pizza[] }; // Pas de paramètres pour HomeScreen
-  pizzaDetailsScreen: { pizza: Pizza };
-};
-
-// Créez le Stack Navigator avec les types définis
-const Stack = createNativeStackNavigator<StackParamList>();
-
-const MyStack = () => {
+const Layout = () => {
   return (
-    <Stack.Navigator initialRouteName="pizzaListScreen">
-      <Stack.Screen
-        name="pizzaListScreen"
-        component={PizzaListScreen}
-        options={{ title: 'Pizza List' }}
-      />
-      <Stack.Screen
-        name="pizzaDetailsScreen"
-        component={PizzaDetailsScreen}
-        options={{ title: 'Pizza Details' }}
-      />
-    </Stack.Navigator>
+    // Fournir l'accès au store Redux à toute l'application
+    <Provider store={store}>
+      {/* Utiliser Stack d'expo-router */}
+      <Stack />
+    </Provider>
   );
 };
 
-export default MyStack;
+export default Layout;

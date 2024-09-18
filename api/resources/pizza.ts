@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { Pizza, PostPizza, PutPizza } from "../models/pizza";
+import { Pizza, PostPizza, PutPizza } from "@/types/pizza.type";
 
 const resource = `pizzas`;
 

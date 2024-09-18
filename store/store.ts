@@ -1,5 +1,5 @@
 import { createSlice, configureStore, PayloadAction } from '@reduxjs/toolkit'
-import { Pizza } from '../../api/models/pizza'
+import { Pizza } from '@/api/models/pizza'
 
 interface PanierPizzas {
     pizzas: Pizza[]
