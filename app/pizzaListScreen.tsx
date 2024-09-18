@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { ScrollView } from 'react-native';
 
-import ApiType from './api';
+import ApiType from '../api';
 import PizzaList from '@/components/PizzaList';
 
-const HomeScreen = () => {
+const PizzaListScreen = () => {
 
   // Get pizzas using api
   const [pizzas, setPizzas] = useState([]);
@@ -40,4 +39,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default PizzaListScreen;

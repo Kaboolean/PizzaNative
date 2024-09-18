@@ -1,4 +1,4 @@
-import { Pizza } from "@/app/api/models/pizza";
+import { Pizza } from "@/api/models/pizza";
 
 export type PizzaListProps = {
     PizzaList: Pizza[];

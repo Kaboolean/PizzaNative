@@ -6,7 +6,7 @@ import { Button, FlatList, Image, Text, View } from 'react-native';
 import { PizzaListProps } from '@/types/pizzalist.type';
 
 // Typage de la navigation
-type HomeScreenNavigationProp = StackNavigationProp<StackParamList, 'productList'>;
+type HomeScreenNavigationProp = StackNavigationProp<StackParamList, 'pizzaListScreen'>;
 
 export default function PizzaList({ PizzaList }: PizzaListProps) {
 
@@ -25,7 +25,7 @@ export default function PizzaList({ PizzaList }: PizzaListProps) {
           <Text>{item.price} €</Text>
           <Button
             title="Détails"
-            onPress={() => navigation.navigate('productDetails', { pizza: item })} // Envoi de tout l'objet item à l'écran Detail
+            onPress={() => navigation.navigate('pizzaDetailsScreen', { pizza: item })} // Envoi de tout l'objet item à l'écran Detail
           />
         </View>
       )}

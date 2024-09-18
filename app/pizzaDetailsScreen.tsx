@@ -1,9 +1,9 @@
 import { useRoute } from '@react-navigation/native';
 import React from 'react';
 import { Image, Text, View } from 'react-native';
-import { Pizza } from './api/models/pizza';
+import { Pizza } from '../api/models/pizza';
 
-export default function ProductDetailsScreen() {
+export default function PizzaDetailsScreen() {
   
   const route = useRoute();
   const { pizza } = route.params as { pizza: Pizza }; // Récupération de l'objet complet item
