@@ -1,14 +1,16 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-const PizzaCard = ({ pizza }) => {
+const PizzaCard = (props: PizzaProps) => {
   return (
     <View style={styles.card}>
-      <Image source={{ uri: pizza.image_url }} style={styles.image} />
+      <Image 
+        source={{ uri: props.image_url }}
+        style={styles.image} />
       <View style={styles.details}>
-        <Text style={styles.name}>{pizza.name}</Text>
-        <Text style={styles.description}>{pizza.description}</Text>
-        <Text style={styles.price}>{pizza.price}</Text>
+        <Text style={styles.name}>{props.name}</Text>
+        <Text style={styles.description}>{props.description}</Text>
+        <Text style={styles.price}>{props.price}</Text>
       </View>
     </View>
   );
