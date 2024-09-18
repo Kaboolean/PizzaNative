@@ -31,10 +31,10 @@ const PizzaCard = (props: PizzaProps) => {
 
   // Determine button behavior based on the route name
   const handleButtonPress = () => {
-    if (route.name === 'pizzaListScreen') {
+    if (route.name.startsWith('pizzaListScreen')) {
       handleViewDetails(props.pizza);
     } 
-    else if (route.name == 'cartScreen') {
+    else if (route.name.startsWith("cartScreen")) {
       handleRemovePizzaToCart(props.pizza);
     }
     else {
@@ -43,7 +43,17 @@ const PizzaCard = (props: PizzaProps) => {
   };
 
   // Determine button title based on route name
-  const buttonTitle = route.name === 'pizzaListScreen' ? 'Voir détails' : 'cartScreen' ? 'Ajouter au panier' : 'Retirer du panier';
+  const ButtonTitle = () => {
+    if(route.name.startsWith('pizzaListScreen')){
+      return "Voir détails";
+    }
+    else if (route.name.startsWith("cartScreen")){
+      return "Retirer du panier";
+    }
+    else{
+      return "Ajouter au panier";
+    }
+  };
 
   return (
     <View style={styles.card}>
@@ -56,7 +66,7 @@ const PizzaCard = (props: PizzaProps) => {
         <Text style={styles.description}>{props.pizza.description}</Text>
         <Text style={styles.price}>{props.pizza.price} €</Text>
         <Button
-          title={buttonTitle}
+          title={ButtonTitle()}
           onPress={handleButtonPress} // Call the handler directly here
         />
       </View>

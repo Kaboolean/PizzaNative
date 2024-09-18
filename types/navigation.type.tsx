@@ -5,7 +5,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 export type StackParamList = {   
     pizzaListScreen: { list: Pizza[] };   
     pizzaDetailsScreen: { pizza: Pizza };
-    cartScreen: { };
+    cartScreen: undefined;
 };
 
 // Typage de la navigation

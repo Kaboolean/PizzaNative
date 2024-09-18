@@ -1,5 +1,6 @@
+import { Pizza } from '@/types/pizza.type'
 import { createSlice, configureStore, PayloadAction } from '@reduxjs/toolkit'
-import { Pizza } from '@/api/models/pizza'
+import { StoreCartDatas } from './asyncStorage'
 
 interface PanierPizzas {
     pizzas: Pizza[]
@@ -14,10 +15,14 @@ const pizzaPanier = createSlice({
   initialState,
   reducers: {
     addPizzaPanier: (state, action: PayloadAction<Pizza>) => {
+      //Push pizza to panier
       state.pizzas.push(action.payload)
+      StoreCartDatas;
     },
     removePizzaPanier: (state, action: PayloadAction<Pizza>) => {
+        //Remove pizza from panier
         state.pizzas.splice(state.pizzas.findIndex(x=> x.id == action.payload.id),1)
+        StoreCartDatas;
       }
   }
 })
