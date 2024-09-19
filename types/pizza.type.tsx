@@ -10,6 +10,15 @@ export type Pizza = {
     image_url: string,
 }
 
+export type PizzaStore = {
+    id: number,
+    name: string,
+    description: string,
+    price: string,
+    image_url: string,
+    quantity:number,
+}
+
 export type PostPizza = {
     name: string,
     description: string,
