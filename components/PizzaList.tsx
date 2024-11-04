@@ -10,7 +10,7 @@ export default function PizzaList({ PizzaList }: PizzaListProps) {
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
         <View style={{ padding: 10 }}>
-          <PizzaCard pizza={item}/>
+          <PizzaCard pizza={item} />
         </View>
       )}
     />

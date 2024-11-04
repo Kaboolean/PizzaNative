@@ -4,19 +4,18 @@ import { View, Text } from "react-native";
 import { useSelector } from "react-redux";
 
 const CartScreen = () => {
-    
-    //Recupérer le panier
-    const panier = useSelector((state: RootState) => state.pizzaPanier.pizzas);
+  // Récupérer le panier depuis Redux
+  const panier = useSelector((state: RootState) => state.pizzaPanier.pizzas);
 
-    return (
-        <View>
-            {panier.length === 0 ? (
-                <Text>Aucune pizza n'est commandée...</Text>
-            ) : (
-                <PizzaList PizzaList={panier} />
-            )}
-        </View>
-    );
+  return (
+    <View style={{ padding: 20 }}>
+      {panier.length === 0 ? (
+        <Text>Aucune pizza n'est commandée...</Text>
+      ) : (
+        <PizzaList PizzaList={panier} /> // On passe la liste des pizzas avec les quantités
+      )}
+    </View>
+  );
 };
 
 export default CartScreen;
