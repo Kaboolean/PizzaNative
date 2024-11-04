@@ -1,37 +1,21 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import React, { useEffect } from 'react';
+import { Stack, useRouter } from 'expo-router'; // Utiliser Stack d'expo-router pour la navigation et useRouter pour rediriger
+import { Provider } from 'react-redux'; // Importer Provider de Redux
+import { store } from '@/store/store'; // Importer le store Redux
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+const Layout = () => {
+  const router = useRouter(); // Utiliser le hook useRouter pour gérer la redirection
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
+    // Rediriger automatiquement vers pizzaListScreen à l'ouverture de l'app
+    router.replace('/pizzaListScreen');
+  }, []);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <Provider store={store}>
+      <Stack />
+    </Provider>
   );
-}
+};
+
+export default Layout;
