@@ -8,7 +8,7 @@ const Layout = () => {
 
   useEffect(() => {
     // Rediriger automatiquement vers pizzaListScreen à l'ouverture de l'app
-    router.replace('/pizzaListScreen');
+    router.replace('/admin');
   }, []);
 
   return (
